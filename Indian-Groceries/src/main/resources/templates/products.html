@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<head>
+<title>Products of Indian Groceries</title>
+<link href="../static/CSS/overalTemplate.css" rel="stylesheet" media="all" type="text/css">
+<link href="../static/CSS/products.css" rel=stylesheet" media="all" type="text/css">
+</head>
+
+<body id="igBody">
+	<div id="main">
+		<nav id="main-nav">
+			<a class="link-tag" href="" target="">Home</a> <a class="link-tag" href="./products" target="">Products</a>
+			<a class="link-tag" href="">New Buyer</a> <a class="link-tag" href="/placeOrder">Place
+				Order</a> <a class="link-tag" href="/invoice">Invoice</a>
+		</nav>
+	<div id="product-container">
+		<div id="listOfProducts"><h1>Will display products here</h1></div>
+		<div id="newProduct">
+			<div id="addedMessage"></div>
+			<form action="addProduct()" target="#addedMessage" method="post">
+				<lable for="description">Product Description</lable>
+				<input type="text" name="description" placeholder="Enter product description">
+				<lable for="price">Product Price</lable>
+				<input type="text" name="price" placeholder="Enter product Price">
+				
+				<button type="submit">Add Product</button>
+			</form>
+		</div>
+	</div>	
+		
+	</div>

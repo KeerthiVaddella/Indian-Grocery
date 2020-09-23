@@ -1,0 +1,22 @@
+#igBody{
+	text-align:center;
+	background:#6e6c8e;
+	
+}
+
+#main-nav{
+	height:3rem;
+	margin-top:0.5rem;
+	
+}
+
+#main-nav > a{
+	text-decoration:none;
+	padding: 14px 25px;
+	font:  small-caps bold 20px/40px Georgia, serif;
+	color:beige;
+}
+
+a:hover , #main-nav  a:hover{
+	color: #fdc826 ;
+}

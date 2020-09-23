@@ -1,0 +1,37 @@
+#main{
+	display:grid;
+}
+
+
+#about_us{
+	margin-top:5rem;
+	margin-left: 6rem;
+	width:90%;
+	height:450px;
+	background-color:blanchedalmond;
+	max-width: 71rem;
+}
+
+#greeting{
+	font-family: 'Sofia';
+	font-size: 32px;
+	color:#1e87d2;
+}
+
+#about_section{
+	font-family: 'Alice';font-size: 18px;
+	padding:20px;
+}
+
+ul {
+    display: block;
+    list-style-type: disc;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 200px;
+    position:relative;
+	left:1.5em;
+	text-align:justify;
+}
