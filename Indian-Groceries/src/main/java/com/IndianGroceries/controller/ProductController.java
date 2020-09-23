@@ -32,7 +32,7 @@ public class ProductController {
 	         return this.productService.addProduct(product);
 	     }
 	     
-	     @RequestMapping(value = "/updateprice", method = RequestMethod.POST,
+	     @RequestMapping(value = "/updateprice", method = RequestMethod.PUT,
 	             consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	     @ResponseBody()
 	     public Boolean updatePrice(@RequestBody String product_id,float new_price) {

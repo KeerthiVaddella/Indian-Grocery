@@ -30,6 +30,7 @@ public class ProductService {
     	for(Product p : products) {
     		if(p.getProduct_id().equals(product_id)) {
     			p.setPrice(new_price);
+    			this.productDao.save(p);
     			success=true;
     		}
     	}
