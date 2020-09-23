@@ -28,7 +28,7 @@ public class ProductController {
 	     @RequestMapping(value = "/addproduct", method = RequestMethod.POST,
 	             consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	     @ResponseBody()
-	     public Product addNewUser(@RequestBody Product product) {
+	     public Product addNewProduct(@RequestBody Product product) {
 	         return this.productService.addProduct(product);
 	     }
 	     
