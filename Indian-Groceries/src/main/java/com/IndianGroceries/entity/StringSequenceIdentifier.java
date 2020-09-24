@@ -6,6 +6,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.engine.spi.SharedSessionContractImplementor;
 import org.hibernate.id.IdentifierGenerator;
 
+
 public class StringSequenceIdentifier implements IdentifierGenerator {
 	
 	public static final String SEQUENCE_PREFIX = "IG";

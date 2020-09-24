@@ -15,7 +15,7 @@ public class Product {
 		@Id
 		@GenericGenerator(
 		        name = "id-sequence",
-		        strategy = "com.IndianGroceries.model.StringSequenceIdentifier"
+		        strategy = "com.IndianGroceries.entity.StringSequenceIdentifier"
 		       /* ,parameters = {
 		            @org.hibernate.annotations.Parameter(
 		                name = "sequence_name", value = "hibernate_sequence"),

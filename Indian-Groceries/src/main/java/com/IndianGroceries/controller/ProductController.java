@@ -3,7 +3,9 @@ package com.IndianGroceries.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,23 +22,46 @@ public class ProductController {
 	     @Autowired
 	     ProductService productService;
 	 
-	     @RequestMapping(value = "/all", method = RequestMethod.GET)
-	     public List<Product> getAllProducts() {
-	         return productService.getAllProducts();
+	     @RequestMapping(value = "/allProducts", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	     public ResponseEntity<List<Product>> getAllProducts() {
+	    	 System.out.println("Entered get all products");
+	    	 List<Product> products=productService.getAllProducts();
+	    	
+	    	 if(products!=null) {
+	         return new ResponseEntity<List<Product>>(products,HttpStatus.OK);
+	    	 }
+	    	 else
+	    		 return new ResponseEntity<List<Product>>(HttpStatus.NOT_FOUND);
 	     }
 	 
-	     @RequestMapping(value = "/addproduct", method = RequestMethod.POST,
+	     @RequestMapping(value = "/addProduct", method = RequestMethod.POST,
 	             consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	     @ResponseBody()
-	     public Product addNewProduct(@RequestBody Product product) {
-	         return this.productService.addProduct(product);
+	     public ResponseEntity<Product> addNewProduct(@RequestBody Product product) {
+	         return new ResponseEntity<Product>(this.productService.addProduct(product),HttpStatus.CREATED);
 	     }
 	     
-	     @RequestMapping(value = "/updateprice", method = RequestMethod.PUT,
+	     @RequestMapping(value = "/updatePrice", method = RequestMethod.PUT,
 	             consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	     @ResponseBody()
-	     public Boolean updatePrice(@RequestBody String product_id,float new_price) {
-	    	 return this.updatePrice(product_id, new_price);
+	     public ResponseEntity<Product> updatePrice(@RequestBody String product_id,float new_price) {
+	    	Product product=this.productService.updatePrice(product_id, new_price);
+	    	 if(product!=null) {
+	    		return new ResponseEntity<Product>(product,HttpStatus.OK);
+	    	}
+	    	 else
+	    		return new ResponseEntity<Product>(HttpStatus.NOT_FOUND);
+	     }
+	     
+	     @RequestMapping(value="/deleteProduct", method = RequestMethod.DELETE)
+	     @ResponseBody()
+	     public ResponseEntity<String> deleteProduct(String product_id){
+	    	 String response=this.productService.deleteProduct(product_id);
+	    	 if(response.equals("deleted")) {
+	    		 return new ResponseEntity<String>(HttpStatus.OK);
+	    	 }
+	    	 else
+	    		 return new ResponseEntity<String>(HttpStatus.NOT_FOUND);
 	     }
 	
 }

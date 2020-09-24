@@ -4,7 +4,9 @@ import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 //import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -12,16 +14,18 @@ import javax.persistence.Table;
 @Entity
 @Table(name="INVOICE")
 public class Invoice {
-
+		
+		@Id
+		@Column(name="INVOICE_NUM",nullable=false)
 		private String invoice_num;
 		
 		private Date order_date;
 		
-		@OneToOne
+		@ManyToOne(targetEntity = Buyer.class)
 		@JoinColumn(name="BUYER_ID")
 		private long buyer_id;
 		
-		@OneToOne
+		@ManyToOne(targetEntity = Product.class)
 		@JoinColumn(name="PRODUCT_ID")
 		private String product_id;
 		

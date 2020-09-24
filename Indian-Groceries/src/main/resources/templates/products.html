@@ -3,6 +3,8 @@
 <title>Products of Indian Groceries</title>
 <link href="../static/CSS/overalTemplate.css" rel="stylesheet" media="all" type="text/css">
 <link href="../static/CSS/products.css" rel="stylesheet" media="all" type="text/css">
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.min.js"></script>
+<script src="../static/JS/products.js" type="text/javascript"></script>
 </head>
 
 <body id="igBody">
@@ -13,18 +15,46 @@
 				Order</a> <a class="link-tag" href="/invoice">Invoice</a>
 		</nav>
 	<div id="product-container">
-		<div id="listOfProducts"><h1>Will display products here</h1></div>
+		<div ng-app="ProductManagement" ng-controller="ProductManagementController">
+         <h1>
+            List of Products
+        </h1>
+ 
+        <table>
+            <tr>
+                <th>Product ID</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Actions</th>
+            </tr>
+ 
+            <tr ng-repeat="product in products">
+                <td>{{ product.product_id }}</td>
+                <td>{{ product.description }}</td>
+                <td>{{ product.price }}</td>
+                <td><a ng-click="editProduct( product )" class="button">Edit</a> | <a ng-click="removeProduct( product )" class="button">Remove</a></td>
+            </tr>
+ 
+        </table>
+        </div>
 		<div id="newProduct">
-			<div id="addedMessage"></div>
-			<form action="addProduct()" target="#addedMessage" method="post">
-				<lable for="description">Product Description</lable>
-				<input type="text" name="description" placeholder="Enter product description">
-				<lable for="price">Product Price</lable>
-				<input type="text" name="price" placeholder="Enter product Price">
-				
-				<button type="submit">Add Product</button>
-			</form>
-		</div>
+			<h2>Add Product</h2>
+ 
+        <form ng-submit="submitProduct()">
+            <table>
+                <tr>
+                    <td>Product Description</td>
+                    <td><input type="text" ng-model="form.description" size="60" /></td>
+                </tr>
+                <tr>
+                    <td>Price</td>
+                    <td><input type="text" ng-model="form.price" size="60" /></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><input type="submit" value="Submit" /></td>
+                </tr>
+            </table>
+        </form>
 	</div>	
 		
 	</div>
