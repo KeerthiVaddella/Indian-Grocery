@@ -8,8 +8,15 @@ public class Controller{
 	
 	@RequestMapping("/welcome")
 	public String welcome() {
-		return "welcome";
+		try {
+			System.out.println(Controller.class.getResource("/static/").getPath());
+		return "forward:/Welcome.html";
 	}
-	
+		catch(Exception e) {
+			System.out.println(e);
+			return "welcome";
+		}
+		
+	}
 	
 }

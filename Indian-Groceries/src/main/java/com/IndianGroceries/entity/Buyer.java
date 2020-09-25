@@ -1,6 +1,8 @@
 package com.IndianGroceries.entity;
 
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,8 +13,8 @@ import javax.persistence.Table;
 
 
 @Entity
-@Table(name="BUYERS")
-public class Buyer {
+@Table(name="BUYER")
+public class Buyer implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE)

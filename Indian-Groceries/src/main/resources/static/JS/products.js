@@ -16,7 +16,7 @@ var app = angular.module("ProductManagement", []);
          
                 //HTTP POST/PUT methods for add/edit Product
                 $scope.submitProduct = function() {
-         
+         			console.log("entered submit function");
                     var method = "";
                     var url = "";
                     if ($scope.form.id == -1) {
@@ -42,10 +42,13 @@ var app = angular.module("ProductManagement", []);
                 };
          
                 //HTTP DELETE- delete product by Id
-                $scope.removeProduct = function(product) {
+                $scope.removeProduct = function(product_id) {
+                	console.log("entered delete angular"+product_id);
+                	let method='DELETE';
+                	let url= 'product/deleteProduct/' + product_id
                     $http({
-                        method : 'DELETE',
-                        url : 'product/deleteProduct'
+                        method : method,
+                        url : url
                     }).then(_success, _error);
                 };
  
@@ -65,7 +68,8 @@ var app = angular.module("ProductManagement", []);
                         method : 'GET',
                         url : 'product/allProducts'
                     }).then(function successCallback(response) {
-                        $scope.products = response.data.products;
+                        $scope.products = response.data;
+                        console.log(response.data);
                     }, function errorCallback(response) {
                         console.log(response.statusText);
                     });

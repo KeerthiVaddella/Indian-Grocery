@@ -1,5 +1,6 @@
 package com.IndianGroceries.entity;
 
+import java.io.Serializable;
 import java.sql.Date;
 
 import javax.persistence.Column;
@@ -13,7 +14,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="INVOICE")
-public class Invoice {
+public class Invoice  implements Serializable{
 		
 		@Id
 		@Column(name="INVOICE_NUM",nullable=false)

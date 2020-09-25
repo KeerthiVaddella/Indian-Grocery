@@ -15,6 +15,7 @@ public class StringSequenceIdentifier implements IdentifierGenerator {
 	public Serializable generate(SharedSessionContractImplementor session, Object object) throws HibernateException {
 		// TODO Auto-generated method stub
 		suffix+=1;
+		System.out.println(SEQUENCE_PREFIX + String.format("%3d%s",0,suffix));
 		return SEQUENCE_PREFIX + String.format("%3d%s",0,suffix);
 	}
 	

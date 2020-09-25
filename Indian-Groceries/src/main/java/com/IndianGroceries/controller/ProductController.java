@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -28,7 +29,11 @@ public class ProductController {
 	    	 List<Product> products=productService.getAllProducts();
 	    	
 	    	 if(products!=null) {
-	         return new ResponseEntity<List<Product>>(products,HttpStatus.OK);
+	    		 for(Product p : products) {
+	    		 System.out.println(p.getProduct_id());
+	    		 }
+	    		 return new ResponseEntity<List<Product>>(products,HttpStatus.OK);
+	         
 	    	 }
 	    	 else
 	    		 return new ResponseEntity<List<Product>>(HttpStatus.NOT_FOUND);
@@ -53,10 +58,13 @@ public class ProductController {
 	    		return new ResponseEntity<Product>(HttpStatus.NOT_FOUND);
 	     }
 	     
-	     @RequestMapping(value="/deleteProduct", method = RequestMethod.DELETE)
+	     @RequestMapping(value="/deleteProduct/{product_id}", method = RequestMethod.DELETE)
 	     @ResponseBody()
-	     public ResponseEntity<String> deleteProduct(String product_id){
+	     public ResponseEntity<String> deleteProduct(@PathVariable("product_id") String product_id){
+	    	 
+	    	 System.out.println("Trying to delete re..."+ product_id);
 	    	 String response=this.productService.deleteProduct(product_id);
+	    	
 	    	 if(response.equals("deleted")) {
 	    		 return new ResponseEntity<String>(HttpStatus.OK);
 	    	 }

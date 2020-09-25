@@ -17,6 +17,8 @@ public class ProductService {
 
     //Gets all the products from the DB
     public List<Product> getAllProducts() {
+    	System.out.println("Entered ProductService getAllProducts()");
+    	
         return this.productDao.findAll();
     }
 
@@ -39,6 +41,7 @@ public class ProductService {
     //Update Price of the product
     public Product updatePrice(String product_id,float new_price) {
     		Product p=getProductById(product_id);
+    		System.out.println("Found product");
      		if(p!=null) {
     			p.setPrice(new_price);
     			this.productDao.save(p);
@@ -51,8 +54,12 @@ public class ProductService {
     //Delete a Product based on the id
     public String deleteProduct(String product_id){
     	Product p=getProductById(product_id);
+    	
+    	
     	if(p!=null) {
+    		System.out.println("Found product");
     		this.productDao.delete(p);
+    		System.out.println("Deleted");
     		return "deleted";
     	}
     	return "notFound";
