@@ -28,7 +28,8 @@ var app = angular.module("ProductManagement", []);
                     } else {
                         //If Id is present, it's edit operation - PUT operation
                         method = "PUT";
-                        url = 'product/updatePrice' + $scope.form.id;
+                        url = 'product/updatePrice/' + $scope.form.id;
+                        console.log("Put method");
                     }
          
                     $http({

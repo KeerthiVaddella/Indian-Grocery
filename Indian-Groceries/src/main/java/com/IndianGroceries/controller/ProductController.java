@@ -46,13 +46,14 @@ public class ProductController {
 	         return new ResponseEntity<Product>(this.productService.addProduct(product),HttpStatus.CREATED);
 	     }
 	     
-	     @RequestMapping(value = "/updatePrice", method = RequestMethod.PUT,
+	     @RequestMapping(value = "/updatePrice/{product_id}", method = RequestMethod.PUT,
 	             consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	     @ResponseBody()
-	     public ResponseEntity<Product> updatePrice(@RequestBody String product_id,float new_price) {
-	    	Product product=this.productService.updatePrice(product_id, new_price);
-	    	 if(product!=null) {
-	    		return new ResponseEntity<Product>(product,HttpStatus.OK);
+	     public ResponseEntity<Product> updatePrice(@PathVariable("product_id") String product_id,@RequestBody Product product) {
+	    	System.out.println(product_id+" & "+product.getPrice());
+	    	 Product product1=this.productService.updatePrice(product_id,product.getPrice());
+	    	 if(product1!=null) {
+	    		return new ResponseEntity<Product>(product1,HttpStatus.OK);
 	    	}
 	    	 else
 	    		return new ResponseEntity<Product>(HttpStatus.NOT_FOUND);

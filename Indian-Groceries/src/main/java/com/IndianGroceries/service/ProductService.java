@@ -1,5 +1,7 @@
 package com.IndianGroceries.service;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +20,10 @@ public class ProductService {
     //Gets all the products from the DB
     public List<Product> getAllProducts() {
     	System.out.println("Entered ProductService getAllProducts()");
-    	
-        return this.productDao.findAll();
+    	List<Product> p=this.productDao.findAll();
+    	Collections.sort(p,new ProductCompare());
+    	//System.out.println(p);
+        return p;
     }
 
     //Add a new product
@@ -65,4 +69,14 @@ public class ProductService {
     	return "notFound";
     }
     
+}
+
+class ProductCompare implements Comparator<Product>{
+
+	@Override
+	public int compare(Product o1, Product o2) {
+		// TODO Auto-generated method stub
+		return o1.getProduct_id().compareTo(o2.getProduct_id());
+	}
+	
 }

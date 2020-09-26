@@ -2,6 +2,7 @@ package com.IndianGroceries.entity;
 
 import java.io.Serializable;
 
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,16 +17,18 @@ import org.hibernate.annotations.GenericGenerator;
 public class Product implements Serializable {
 		@Id
 		@GenericGenerator(
-		        name = "id-sequence",
-		        strategy = "com.IndianGroceries.entity.StringSequenceIdentifier"
-		       /* ,parameters = {
+		        name = "id_sequence",
+		        strategy = "com.IndianGroceries.entity.StringSequenceIdentifier",
+		       parameters = {
 		            @org.hibernate.annotations.Parameter(
-		                name = "sequence_name", value = "hibernate_sequence"),
+		                name = StringSequenceIdentifier.INCREMENT_PARAM, value = "1"),
 		            @org.hibernate.annotations.Parameter(
-		                name = "sequence_prefix", value = "IG_"),
-		        }*/
+		                name = StringSequenceIdentifier.VALUE_PREFIX_PARAMETER, value = "IG_"),
+		            @org.hibernate.annotations.Parameter(
+			                name = StringSequenceIdentifier.NUMBER_FORMAT_PARAMETER, value = "%03d")
+		        }
 		    )
-		@GeneratedValue(generator="id-sequence",strategy = GenerationType.SEQUENCE)
+		@GeneratedValue(generator="id_sequence",strategy = GenerationType.SEQUENCE)
 		//@Column(name="PRODUCT_ID")
 		private String product_id;
 		
@@ -69,4 +72,7 @@ public class Product implements Serializable {
 		}
 		
 		
+		
 }
+
+

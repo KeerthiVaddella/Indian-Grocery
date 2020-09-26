@@ -28,7 +28,7 @@
                 <th>Actions</th>
             </tr>
  
-            <tr ng-repeat="product in products">
+            <tr ng-repeat="product in products" orderBy="product.product_id">
                 <td>{{ product.product_id }}</td>
                 <td>{{ product.description }}</td>
                 <td>{{ product.price }}</td>
