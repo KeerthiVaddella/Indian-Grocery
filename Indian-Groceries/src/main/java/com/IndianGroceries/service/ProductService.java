@@ -5,8 +5,6 @@ import java.util.Comparator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.IndianGroceries.dao.ProductDao;
@@ -31,7 +29,7 @@ public class ProductService {
         return this.productDao.save(product);
     }
     
-    private Product getProductById(String product_id) {
+   private Product getProductById(String product_id) {
     	Product productById=null;
     	for(Product p : productDao.findAll()) {
     		if(p.getProduct_id().equals(product_id)) {

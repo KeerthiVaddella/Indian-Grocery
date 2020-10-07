@@ -1,5 +1,6 @@
 <!DOCTYPE HTML>
 <head>
+<meta charset="ISO-8859-1">
 <title>Products of Indian Groceries</title>
 <link href="./CSS/overalTemplate.css" rel="stylesheet" media="all" type="text/css">
 <link href="./CSS/products.css" rel="stylesheet" media="all" type="text/css">
@@ -11,7 +12,7 @@
 	<div id="main">
 		<nav id="main-nav">
 			<a class="link-tag" href="./Welcome.html" target="">Home</a> <a class="link-tag" href="./products.html" target="">Products</a>
-			<a class="link-tag" href="">New Buyer</a> <a class="link-tag" href="/placeOrder">Place
+			<a class="link-tag" href="./Buyer.html">New Buyer</a> <a class="link-tag" href="/placeOrder">Place
 				Order</a> <a class="link-tag" href="/invoice">Invoice</a>
 		</nav>
 	<div id="product-container">
@@ -28,7 +29,7 @@
                 <th>Actions</th>
             </tr>
  
-            <tr ng-repeat="product in products" orderBy="product.product_id">
+            <tr ng-repeat="product in products">
                 <td>{{ product.product_id }}</td>
                 <td>{{ product.description }}</td>
                 <td>{{ product.price }}</td>
@@ -44,11 +45,11 @@
             <table>
                 <tr>
                     <td>Product Description</td>
-                    <td><input type="text" ng-model="form.description" size="60" /></td>
+                    <td><input type="text" ng-model="form.description" size="60" required/></td>
                 </tr>
                 <tr>
                     <td>Price</td>
-                    <td><input type="text" ng-model="form.price" size="60" /></td>
+                    <td><input type="text" ng-model="form.price" size="60" required/></td>
                 </tr>
                 <tr>
                     <td colspan="2"><button type="submit" value="Submit" >Add Product</button></td>

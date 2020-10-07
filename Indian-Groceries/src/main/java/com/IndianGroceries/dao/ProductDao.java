@@ -7,4 +7,5 @@ import com.IndianGroceries.entity.Product;
 
 @Repository
 public interface ProductDao extends JpaRepository<Product, Integer> {
+		
 }

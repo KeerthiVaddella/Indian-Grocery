@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Buyers of Indian Groceries</title>
+<link href="./CSS/overalTemplate.css" rel="stylesheet" media="all"
+	type="text/css">
+<link href="./CSS/products.css" rel="stylesheet" media="all"
+	type="text/css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.min.js"></script>
+</head>
+<body id="igBody">
+	<div id="main">
+		<nav id="main-nav">
+			<a class="link-tag" href="./Welcome.html" target="">Home</a> <a
+				class="link-tag" href="./products.html" target="">Products</a> <a
+				class="link-tag" href="./Buyer.html">New Buyer</a> <a
+				class="link-tag" href="/placeOrder">Place Order</a> <a
+				class="link-tag" href="/invoice">Invoice</a>
+		</nav>
+		<div id="left-nav" ng-controller="displayControl">
+			<nav id="left-nav">
+				<button ng-click="addNewBuyer()">New Buyer</button>
+				<button ng-click="showBuyers()">Buyers List</button>
+				<button ng-click="getPrevOrders()">Previous Orders</button>
+			</nav>
+			<div ng-app="buyerOps" ng-controller="displayControl">
+				<div ng-show="newBuyer">
+					<h2>Add New Buyer</h2>
+
+					<form ng-submit="addBuyer()">
+						<table>
+							<tr>
+								<td>Buyer Name</td>
+								<td><input type="text" ng-model="form.name" size="150"
+									required placeholder="Enter Name" /></td>
+							</tr>
+							<tr>
+								<td>Address</td>
+								<td><textarea ng-model="form.address" rows="5" cols="150"
+										required placeholder="Enter Address"></textarea></td>
+							</tr>
+							<tr>
+								<td colspan="2"><button type="submit" value="Submit">Add
+										Buyer</button></td>
+							</tr>
+						</table>
+					</form>
+
+				</div>
+				<div ng-show="allBuyers">
+					<h2>List of Buyers</h2>
+					<table>
+						<tr>
+							<th>Buyer ID</th>
+							<th>Buyer Name</th>
+							<th>Buyer Address</th>
+							<th>GSTIN</th>
+							<th>Actions</th>
+						</tr>
+
+						<tr ng-repeat="buyer in buyers">
+							<td>{{ buyer.buyer_id }}</td>
+							<td>{{ buyer.buyer_name }}</td>
+							<td>{{ buyer.address }}</td>
+							<td>{{ buyer.gstin }}</td>
+							<td><a ng-click="getAllOrders(buyer.buyer_id)" class="button">Get Orders</a></td>
+							<td><a ng-click="editBuyer(buyer)" class="button">Edit</a> |
+								<a ng-click="removeBuyer(buyer.buyer_id)" class="button">Remove</a></td>
+						</tr>
+
+					</table>
+
+				</div>
+				<div ng-show="allOrders">
+					<h2>List of orders of {{ buyer.buyer_name }}</h2>
+					
+					<table>
+						<tr>
+							<th>Invoice Number</th>
+							<th>Date </th>
+							<th>Product Description</th>
+							<th>Packaging</th>
+							<th>Quantity</th>
+							<th>Free Packs</th>
+							<th>Distributor Price</th>
+							<th>Seller Price</th>
+							<th>Tax</th>
+							<th>Amount</th>
+						</tr>
+						<tr ng-repeat="invoice in invoices">
+							<td>{{ invoice.invoice_num }}</td>
+							<td>{{ invoice.order_date }}</td>
+							<td>{{ invoice.description
+					</table>
+					
+				</div>
+			</div>
+
+		</div>
+
+
+	</div>
+</body>
+</html>

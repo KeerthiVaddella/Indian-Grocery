@@ -1,0 +1,11 @@
+@charset "ISO-8859-1";
+
+#product-container{
+	background-color: burlywood;
+    padding: 2rem;
+    text-align: -webkit-center;
+}
+
+h1{
+	    color: darkslategray;
+}

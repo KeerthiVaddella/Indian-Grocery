@@ -16,14 +16,24 @@ public class InvoiceService {
     InvoiceDao invoiceDao;
 
     //Add a new product
-    public Invoice addInvoiceRecord(Invoice invoice) {
-        return this.invoiceDao.save(invoice);
+    public String addInvoiceRecord(List<Invoice> invoice) {
+    	if(invoice != null) {
+    		for(Invoice i : invoice) {
+    			this.invoiceDao.save(i);
+    		}
+    		return "added";
+    	}
+    	else return "invalid entry";
     }
     
+    private List<Invoice> getAll(){
+    	
+    	return this.invoiceDao.findAll();
+    }
     //Retrieving Invoice by invoice_num
     public List<Invoice> getInvoiceByNum(String invoice_num) {
     	List<Invoice> invoiceByNum=new ArrayList<Invoice>();
-    	for(Invoice i : invoiceDao.findAll()) {
+    	for(Invoice i : this.getAll()) {
     		if(i.getInvoice_num().equals(invoice_num)) {
     			invoiceByNum.add(i);
     		}
@@ -31,6 +41,15 @@ public class InvoiceService {
     	return invoiceByNum;
     }
     
+    public List<Invoice> getBuyerOrders(Long buyer_id){
+    	List<Invoice> buyerOrders= new ArrayList<Invoice>();
+    	for(Invoice i : this.getAll()) {
+    		if(i.getBuyer_id()==buyer_id){
+    			buyerOrders.add(i);
+    		}
+    	}
+    	return buyerOrders;
+    }
     
     
 

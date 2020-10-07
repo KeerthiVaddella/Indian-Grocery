@@ -1,8 +1,5 @@
 package com.IndianGroceries.entity;
 
-
-import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,28 +10,38 @@ import javax.persistence.Table;
 
 
 @Entity
-@Table(name="BUYER")
-public class Buyer implements Serializable {
-	
+@Table(name = "BUYER")
+public class Buyer {
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private long buyer_id;
-	
+
 	private String buyer_name;
-	
-	@Column(name="ADDRESS")
+
+	@Column(name = "ADDRESS")
 	private String address;
+
+	private String gstin;
 	
-	//no agrs constructor
+	
+	
+	// no agrs constructor
 	public Buyer() {
-		
+	}
+
+	// argumented constructor
+	public Buyer(long buyer_id, String buyer_name, String address, String gstin) {
+		this.buyer_id = buyer_id;
+		this.buyer_name = buyer_name;
+		this.address = address;
+		this.gstin = gstin;
 	}
 	
-	//argumented constructor
-	public Buyer(long buyer_id,String buyer_name,String address) {
-		this.buyer_id=buyer_id;
+	public void updateBuyer(String buyer_name,String address,String gstin) {
 		this.buyer_name=buyer_name;
-		this.address=address;
+		this.address = address;
+		this.gstin = gstin;
 	}
 	
 	public long getBuyer_id() {
@@ -60,6 +67,13 @@ public class Buyer implements Serializable {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	
-	
+
+	public String getGstin() {
+		return gstin;
+	}
+
+	public void setGstin(String gstin) {
+		this.gstin = gstin;
+	}
+
 }

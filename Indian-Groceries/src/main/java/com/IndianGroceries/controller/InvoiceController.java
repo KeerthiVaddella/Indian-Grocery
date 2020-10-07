@@ -4,11 +4,10 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.IndianGroceries.entity.Invoice;
@@ -21,7 +20,7 @@ public class InvoiceController {
 	 @Autowired
 	 InvoiceService invoiceService;
 	 
-	 @RequestMapping(value = "/invoiceByNumber", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	 @GetMapping("/invoiceByNumber")
 	 public ResponseEntity<List<Invoice>> getInvoiceByNumber(String invoice_num){
 		 List<Invoice> invoice=this.invoiceService.getInvoiceByNum(invoice_num);
 		 
@@ -33,12 +32,14 @@ public class InvoiceController {
 		 
 	 }
 	 
-	 @RequestMapping(value = "/addInvoiceEntry", method = RequestMethod.POST, 
-			 consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-     @ResponseBody()
-	 public ResponseEntity<Invoice> addInvoiceEntry(Invoice invoice){
-		 
-		 return new ResponseEntity<Invoice>(this.invoiceService.addInvoiceRecord(invoice),HttpStatus.CREATED);
+	 @PostMapping("/addInvoiceEntry")
+	 public ResponseEntity<String> addInvoiceEntry(List<Invoice> invoice){
+		 String added=this.invoiceService.addInvoiceRecord(invoice);
+		 if(added.equalsIgnoreCase("added")) {
+			 return new ResponseEntity<String>(HttpStatus.OK);
+		 }
+		 else
+		 return new ResponseEntity<String>(HttpStatus.NOT_IMPLEMENTED);
 		 
 	 }
 }

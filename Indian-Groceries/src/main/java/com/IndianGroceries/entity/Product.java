@@ -1,8 +1,5 @@
 package com.IndianGroceries.entity;
 
-import java.io.Serializable;
-
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,7 +11,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name="PRODUCT")
-public class Product implements Serializable {
+public class Product{
 		@Id
 		@GenericGenerator(
 		        name = "id_sequence",
