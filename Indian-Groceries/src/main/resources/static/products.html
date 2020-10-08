@@ -21,7 +21,7 @@
             List of Products
         </h1>
  
-        <table>
+        <table id="product-table">
             <tr>
                 <th>Product ID</th>
                 <th>Description</th>
@@ -33,28 +33,27 @@
                 <td>{{ product.product_id }}</td>
                 <td>{{ product.description }}</td>
                 <td>{{ product.price }}</td>
-                <td><a ng-click="editProduct(product)" class="button">Edit</a> | <a ng-click="removeProduct(product.product_id)" class="button">Remove</a></td>
+                <td class="actions-class"><a ng-click="editProduct(product)" class="button">Edit</a> | <a ng-click="removeProduct(product.product_id)" class="button">Remove</a></td>
             </tr>
  
         </table>
         
 		<div id="newProduct">
-			<h2>Add New Product</h2>
+			<h1>Add New Product</h1>
  
-        <form ng-submit="submitProduct()">
-            <table>
-                <tr>
-                    <td>Product Description</td>
-                    <td><input type="text" ng-model="form.description" size="60" required/></td>
-                </tr>
-                <tr>
-                    <td>Price</td>
-                    <td><input type="text" ng-model="form.price" size="60" required/></td>
-                </tr>
-                <tr>
-                    <td colspan="2"><button type="submit" value="Submit" >Add Product</button></td>
-                </tr>
-            </table>
+        <form id="form-id" ng-submit="submitProduct()">
+        		<div class="form-div">
+            	<label  for="description">Product Description</label>
+                <input type="text" id="description" ng-model="form.description" size="60" required/>
+                </div>
+                <div class="form-div">
+            	<label  for="price">Price</td>
+                <input type="text" id="price" ng-model="form.price" size="60" required/>
+                </label>
+                </div>
+                <div class="form-div">
+                  <button id="submit" type="submit" value="Submit" >Add Product</button>
+				</div>
         </form>
 	</div>	
 	</div>	

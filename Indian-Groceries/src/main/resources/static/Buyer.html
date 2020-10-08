@@ -5,7 +5,7 @@
 <title>Buyers of Indian Groceries</title>
 <link href="./CSS/overalTemplate.css" rel="stylesheet" media="all"
 	type="text/css">
-<link href="./CSS/products.css" rel="stylesheet" media="all"
+<link href="./CSS/buyer.css" rel="stylesheet" media="all"
 	type="text/css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.min.js"></script>
@@ -19,38 +19,43 @@
 				class="link-tag" href="/placeOrder">Place Order</a> <a
 				class="link-tag" href="/invoice">Invoice</a>
 		</nav>
-		<div id="left-nav" ng-controller="displayControl">
-			<nav id="left-nav">
-				<button ng-click="addNewBuyer()">New Buyer</button>
-				<button ng-click="showBuyers()">Buyers List</button>
-				<button ng-click="getPrevOrders()">Previous Orders</button>
-			</nav>
-			<div ng-app="buyerOps" ng-controller="displayControl">
+		<div id="nav-div" ng-app="buyerOps" ng-controller="displayControl">
+			<div id="nav">
+				<nav id="left-nav">
+					<button ng-click="addNewBuyer()">New Buyer</button>
+					<br>
+					<button ng-click="showBuyers()">Buyers List</button>
+					<br>
+					<button ng-click="getPrevOrders()">Previous Orders</button>
+				</nav>
+			</div>
+			<div id="main-container">
 				<div ng-show="newBuyer">
-					<h2>Add New Buyer</h2>
+					<h1>Add New Buyer</h1>
 
-					<form ng-submit="addBuyer()">
-						<table>
-							<tr>
-								<td>Buyer Name</td>
-								<td><input type="text" ng-model="form.name" size="150"
-									required placeholder="Enter Name" /></td>
-							</tr>
-							<tr>
-								<td>Address</td>
-								<td><textarea ng-model="form.address" rows="5" cols="150"
-										required placeholder="Enter Address"></textarea></td>
-							</tr>
-							<tr>
-								<td colspan="2"><button type="submit" value="Submit">Add
-										Buyer</button></td>
-							</tr>
-						</table>
+					<form id="form-id" ng-submit="addBuyer()">
+						<div class="form-div">
+							<label for="name">Buyer Name</label><br> <input type="text" id="name"
+								ng-model="form.name" size="100" required
+								placeholder="Enter Name" />
+						</div>
+						<div  class="form-div">
+							<label for="address">Address</label><br>
+							<textarea id="address" ng-model="form.address" rows="5" cols="102" required
+								placeholder="Enter Address"></textarea>
+						</div>
+						<div  class="form-div">
+							<label for="gstin"> GSTIN</label><br> <input type="text" id="gstin" ng-model="form.gstin"
+								size="100" required placeholder="Enter GSTIN">
+						</div>
+						<div  class="form-div">
+							<button id="submit" type="submit" value="Submit">Add Buyer</button>
+						</div>
 					</form>
 
 				</div>
 				<div ng-show="allBuyers">
-					<h2>List of Buyers</h2>
+					<h1>List of Buyers</h1>
 					<table>
 						<tr>
 							<th>Buyer ID</th>
@@ -65,7 +70,8 @@
 							<td>{{ buyer.buyer_name }}</td>
 							<td>{{ buyer.address }}</td>
 							<td>{{ buyer.gstin }}</td>
-							<td><a ng-click="getAllOrders(buyer.buyer_id)" class="button">Get Orders</a></td>
+							<td><a ng-click="getAllOrders(buyer.buyer_id)"
+								class="button">Get Orders</a></td>
 							<td><a ng-click="editBuyer(buyer)" class="button">Edit</a> |
 								<a ng-click="removeBuyer(buyer.buyer_id)" class="button">Remove</a></td>
 						</tr>
@@ -74,12 +80,12 @@
 
 				</div>
 				<div ng-show="allOrders">
-					<h2>List of orders of {{ buyer.buyer_name }}</h2>
-					
+					<h1>List of orders of {{ buyer.buyer_name }}</h1>
+
 					<table>
 						<tr>
 							<th>Invoice Number</th>
-							<th>Date </th>
+							<th>Date</th>
 							<th>Product Description</th>
 							<th>Packaging</th>
 							<th>Quantity</th>
@@ -94,13 +100,14 @@
 							<td>{{ invoice.order_date }}</td>
 							<td>{{ invoice.description
 					</table>
-					
-				</div>
-			</div>
 
+				</div>
+
+			</div>
 		</div>
 
 
 	</div>
+	<script src="./JS/buyer.js" type="text/javascript"></script>
 </body>
 </html>

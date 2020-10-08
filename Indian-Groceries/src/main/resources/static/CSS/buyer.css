@@ -1,1 +1,28 @@
 @charset "ISO-8859-1";
+
+#nav-div{
+	margin-top: 3rem;
+	display: grid;
+    grid-template-columns: 261px 639px;
+    grid-column-gap: 7.5rem;
+}
+
+#left-nav > button{
+	font-size: 20px;
+    padding: 8px;
+    width:100%;
+}
+
+#main-container{
+	background-color: darkgrey;
+    width: max-content;
+}
+
+#submit{
+	margin : 5px 0 6px 46%;	
+	font-size:18px;
+}
+
+label{
+	font-size: large;
+}

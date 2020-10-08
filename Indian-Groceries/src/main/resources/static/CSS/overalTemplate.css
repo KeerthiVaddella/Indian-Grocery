@@ -13,10 +13,28 @@
 #main-nav > a{
 	text-decoration:none;
 	padding: 14px 25px;
-	font:  small-caps bold 20px/40px Georgia, serif;
+	font:  small-caps bold 30px/50px Georgia, serif;
 	color:beige;
 }
 
 a:hover , #main-nav  a:hover{
 	color: #fdc826 ;
 }
+
+h1 {
+	color: darkslategray;
+}
+
+.form-div{
+  margin:1rem;
+  display:block;
+  text-align:left;
+}
+
+#form-id{
+  padding: 0.25rem 0;
+ }
+ 
+ input{
+ 	margin-top:8px;
+ }
