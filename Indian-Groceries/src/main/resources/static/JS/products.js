@@ -3,7 +3,7 @@ var app = angular.module("ProductManagement", []);
             //Controller Part
             app.controller("ProductManagementController", function($scope, $http) {
          
-                //Initialize page with default data which is blank in this example
+                //Initialize page with default data
                 $scope.products = [];
                 $scope.form = {
                     id : -1,
@@ -76,7 +76,7 @@ var app = angular.module("ProductManagement", []);
                     });
                 }
          
-                function _success(response) {
+                function _success() {
                     _refreshPageData();
                     _clearForm()
                 }

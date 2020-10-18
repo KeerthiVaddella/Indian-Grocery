@@ -14,15 +14,31 @@
 }
 
 #main-container{
-	background-color: darkgrey;
+	background-color: #1E56A0;
     width: max-content;
+    color:#F6F6F6;
 }
 
 #submit{
-	margin : 5px 0 6px 46%;	
+	margin : 5px 0 6px 43%;	
 	font-size:18px;
 }
 
 label{
 	font-size: large;
+}
+
+h2{
+	font-family: 'Aldrich';
+	font-size: 22px;
+	color:#D2F6FC;
+}
+
+#buyer-table{
+	    width: 95%;
+	    margin: 20px;
+}
+
+#address{
+	word-break: keep-all;
 }

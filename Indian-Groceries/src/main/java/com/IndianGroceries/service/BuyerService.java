@@ -21,7 +21,7 @@ public class BuyerService {
     public String addBuyer(Buyer buyer) {
     	for(Buyer b : getAllBuyers()) {
     		if(b.getAddress().equalsIgnoreCase(buyer.getAddress())) {
-    			return "Already Exists";
+    			return "Address Already Exists";
     		}
     	}
     	this.buyerDao.save(buyer);
@@ -37,21 +37,23 @@ public class BuyerService {
         return p;
     }
     
-    private Buyer getBuyerById(Long buyer_id) {
+    public Buyer getBuyerById(Long buyer_id) {
     	Buyer buyerById=null;
-    	for(Buyer b : buyerDao.findAll()) {
+    	List<Buyer> buyers=buyerDao.findAll();
+    	for(Buyer b : buyers) {
     		if(b.getBuyer_id()==buyer_id) {
     			buyerById=b;
-    		}
+       		}
     	}
     	return buyerById;
     }
 	
+    
     //Update Buyer Details
     public String updateBuyer(Buyer buyer) {
-    	for(Buyer b : getAllBuyers()) {
-    		if(b.getAddress().equalsIgnoreCase(buyer.getAddress())) {
-    			return "Already Exists";
+    	for(Buyer b: buyerDao.findAll()) {
+    		if(b.getBuyer_id()!=buyer.getBuyer_id() && b.getAddress().contentEquals(buyer.getAddress())) {
+    			return "Address Already Exists";
     		}
     	}
     	Buyer b1=getBuyerById(buyer.getBuyer_id());

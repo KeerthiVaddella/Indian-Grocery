@@ -1,8 +1,17 @@
 #igBody{
 	text-align:center;
-	background:#6e6c8e;
+	background:#D6E4F0;
 	
 }
+
+
+/*
+#163172
+#1E56A0
+#D6E4F0
+#F6F6F6
+#FFFFFF
+*/
 
 #main-nav{
 	height:3rem;
@@ -14,7 +23,7 @@
 	text-decoration:none;
 	padding: 14px 25px;
 	font:  small-caps bold 30px/50px Georgia, serif;
-	color:beige;
+	color:#163172;
 }
 
 a:hover , #main-nav  a:hover{
@@ -22,7 +31,7 @@ a:hover , #main-nav  a:hover{
 }
 
 h1 {
-	color: darkslategray;
+	color: #FFFFFF;
 }
 
 .form-div{
@@ -38,3 +47,19 @@ h1 {
  input{
  	margin-top:8px;
  }
+
+ table{
+	border-style: outset;
+	border-collapse: collapse;
+	width:80%;
+	border-color:#F6F6F6;
+	
+}
+
+th {
+	height: 37px;
+	border: 1px solid #FFFFFF;	
+	padding: 0 30px;
+}
+
+

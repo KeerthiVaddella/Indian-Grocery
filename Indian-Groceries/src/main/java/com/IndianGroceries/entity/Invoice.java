@@ -33,7 +33,7 @@ public class Invoice{
 		private int quantity;
 		private int freepacks;
 		
-		private float distributor_price;
+		
 		private float selling_price;
 		private float tax;
 		private double amount;
@@ -43,7 +43,7 @@ public class Invoice{
 		}
 		
 		public Invoice(String invoice_num,Date order_date,long buyer_id,String product_id,String package_type,int quantity,int freepacks,
-				float distributor_price,float selling_price,float tax,double amount) {
+				float selling_price,float tax,double amount) {
 			//if needed
 		}
 		public String getInvoice_num() {
@@ -88,12 +88,7 @@ public class Invoice{
 		public void setFreepacks(int freepacks) {
 			this.freepacks = freepacks;
 		}
-		public float getDistributor_price() {
-			return distributor_price;
-		}
-		public void setDistributor_price(float distributor_price) {
-			this.distributor_price = distributor_price;
-		}
+		
 		public float getSelling_price() {
 			return selling_price;
 		}

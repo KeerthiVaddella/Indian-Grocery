@@ -8,19 +8,21 @@
 	margin-left: 6rem;
 	width:90%;
 	height:450px;
-	background-color:blanchedalmond;
+	background-color:#1E56A0;
 	max-width: 71rem;
 }
 
 #greeting{
 	font-family: 'Sofia';
 	font-size: 32px;
-	color:#1e87d2;
+	color:#FFFFFF;
 }
 
 #about_section{
-	font-family: 'Alice';font-size: 18px;
+	font-family: 'Alice';
+	font-size: 18px;
 	padding:20px;
+	color:#F6F6F6;
 }
 
 ul {
@@ -34,4 +36,8 @@ ul {
     position:relative;
 	left:1.5em;
 	text-align:justify;
+}
+
+.link-tag{
+	color:aquamarine;
 }

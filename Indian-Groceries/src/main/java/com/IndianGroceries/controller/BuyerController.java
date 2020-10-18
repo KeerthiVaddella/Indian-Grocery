@@ -36,21 +36,22 @@ public class BuyerController {
 
 	@PostMapping("/addBuyer")
 	public ResponseEntity<String> addBuyer(@RequestBody Buyer buyer) {
+		System.out.println("entered add buyer"+ buyer.getBuyer_name());
 		String added = buyerService.addBuyer(buyer);
 		if (added.equalsIgnoreCase("added")) {
-			return new ResponseEntity<String>(HttpStatus.OK);
+			return new ResponseEntity<String>(added,HttpStatus.OK);
 		} else
-			return new ResponseEntity<String>(HttpStatus.FAILED_DEPENDENCY);
+			return new ResponseEntity<String>(added,HttpStatus.FAILED_DEPENDENCY);
 	}
 
 	@PutMapping("/updateBuyer")
 	public ResponseEntity<String> updateBuyer(@RequestBody Buyer buyer) {
-
+		System.out.println("update buyer controller"+buyer.getBuyer_name());
 		String updated = buyerService.updateBuyer(buyer);
 		if (updated.equalsIgnoreCase("updated")) {
-			return new ResponseEntity<String>(HttpStatus.OK);
+			return new ResponseEntity<String>(updated,HttpStatus.OK);
 		} else
-			return new ResponseEntity<String>(HttpStatus.FAILED_DEPENDENCY);
+			return new ResponseEntity<String>(updated,HttpStatus.FAILED_DEPENDENCY);
 	}
 
 
@@ -61,8 +62,20 @@ public class BuyerController {
 		String response = this.buyerService.deleteBuyer(buyer_id);
 
 		if (response.equalsIgnoreCase("deleted")) {
-			return new ResponseEntity<String>(HttpStatus.OK);
+			return new ResponseEntity<String>(response,HttpStatus.OK);
 		} else
-			return new ResponseEntity<String>(HttpStatus.NOT_FOUND);
+			return new ResponseEntity<String>(response,HttpStatus.NOT_FOUND);
+	}
+	
+	@GetMapping("/getBuyerName/{buyer_id}")
+	public ResponseEntity<Buyer> getBuyerName(@PathVariable("buyer_id") Long buyer_id){
+		Buyer buyer=this.buyerService.getBuyerById(buyer_id);
+		
+		if(buyer!=null) {
+			
+			return new ResponseEntity<Buyer>(buyer,HttpStatus.OK);
+		}
+		else
+			return new ResponseEntity<Buyer>(HttpStatus.NOT_FOUND);
 	}
 }
