@@ -1,12 +1,13 @@
 /**
  Buyer page controlling using angular
  */
- 
  let app =angular.module("buyerOps",[]);
  
  		//OnClick buttons
- 		app.controller("displayControl",['$scope','$rootScope',
- 		function($scope,$http){
+ 		app.service('getBuyers',function($scope){
+ 	return $scope.buyers;
+}).controller("displayControl",['getBuyers',
+ 		function($scope,$http,getBuyers){
  			$scope.newBuyer=true;
  			$scope.allBuyers=false;
  			$scope.allOrders=false;
@@ -22,9 +23,7 @@
  			$scope.showMessage=false;
  			$scope.buyer_name="";
  			
- 			$rootScope.$on("getBuyers",function(){
- 				getAllBuyers();
- 				});
+ 			
  			 			
  			//displays Buyer Form
  			$scope.addNewBuyer=function(){
@@ -154,7 +153,7 @@
                 	$scope.message = decodeURIComponent(params[0].split('=')[1]);
                     _clearForm();
                 }
-         
+                
                 //Clear the form
                 function _clearForm() {
                     $scope.form.buyer_id =-1;
@@ -163,3 +162,4 @@
                     $scope.form.gstin="";
                 };
  		}]);
+ 		
