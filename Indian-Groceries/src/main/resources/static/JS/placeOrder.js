@@ -1,13 +1,25 @@
-
-
-let app1 = angular.module("orderApp",[]);
+'use strict';
 
 	//Controller part
-	app1.controller("placeOrders",
-	function($scope,$http,getBuyers){
+	angular.module('IGApp').controller("placeOrders",['$scope','buyerService',
+	function($scope,buyerService){
 		
 		//Initializing data
 		$scope.products=[];
-		$scope.buyers=getBuyers;
+		$scope.buyers=[];
+		
+		function getBuyers(){
+			buyerService.getAllBuyers()
+			.then(function(data){
+				$scope.buyers=data;
+				console.log($scope.buyers);
+				},function(errRes){
+				 console.log("Error while fetching buyers "+errRes);
+				}
+			);
+			
+		}
+		getBuyers();
+		
 	
-	});
+	}]);
