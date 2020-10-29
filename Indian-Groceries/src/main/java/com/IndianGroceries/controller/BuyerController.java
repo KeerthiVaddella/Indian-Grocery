@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +18,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.IndianGroceries.entity.Buyer;
 import com.IndianGroceries.service.BuyerService;
 
+//import jdk.nashorn.internal.parser.JSONParser;
+import net.minidev.json.JSONObject;
+import net.minidev.json.parser.JSONParser;
+import net.minidev.json.parser.ParseException;
+
 @RestController
 @RequestMapping("/buyer")
 public class BuyerController {
@@ -24,8 +30,10 @@ public class BuyerController {
 	@Autowired
 	BuyerService buyerService;
 	
+	JSONParser parser = new JSONParser(JSONParser.DEFAULT_PERMISSIVE_MODE);
+	
 	@GetMapping("/allBuyers")
-	//@RequestMapping(value = "/allBuyerss", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	
 	public ResponseEntity<List<Buyer>> getBuyers() {
 		List<Buyer> buyers = buyerService.getAllBuyers();
 		if (buyers != null) {
@@ -35,37 +43,69 @@ public class BuyerController {
 	}
 
 	@PostMapping("/addBuyer")
-	public ResponseEntity<String> addBuyer(@RequestBody Buyer buyer) {
+	public ResponseEntity<JSONObject> addBuyer(@RequestBody Buyer buyer) {
 		System.out.println("entered add buyer"+ buyer.getBuyer_name());
 		String added = buyerService.addBuyer(buyer);
+		try {
 		if (added.equalsIgnoreCase("added")) {
-			return new ResponseEntity<String>(added,HttpStatus.OK);
-		} else
-			return new ResponseEntity<String>(added,HttpStatus.FAILED_DEPENDENCY);
+			added="{'response':"+added+"}";
+			return ResponseEntity.ok((JSONObject)parser.parse(added));
+		} else {
+			added="{'response':"+added+"}";
+			return ResponseEntity.status(HttpStatus.FAILED_DEPENDENCY).body((JSONObject)parser.parse(added));
+		}
+		}catch(ParseException pe){
+			System.out.println("Something happened while converting to JSON");
+		}
+			return null;
 	}
 
-	@PutMapping("/updateBuyer")
-	public ResponseEntity<String> updateBuyer(@RequestBody Buyer buyer) {
+	@PutMapping(path="/updateBuyer",produces=MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<JSONObject> updateBuyer(@RequestBody Buyer buyer) {
 		System.out.println("update buyer controller"+buyer.getBuyer_name());
 		String updated = buyerService.updateBuyer(buyer);
+		System.out.println(updated);
+		try {
 		if (updated.equalsIgnoreCase("updated")) {
-			return new ResponseEntity<String>(updated,HttpStatus.OK);
-		} else
-			return new ResponseEntity<String>(updated,HttpStatus.FAILED_DEPENDENCY);
-	}
+			System.out.println("Inside Success of Update");
+			updated="{'response':"+updated+"}";
+			return ResponseEntity.ok((JSONObject)parser.parse(updated));
+			
+		} else {
+			System.out.println(updated);
+			updated="{'response':"+updated+"}";
+			return ResponseEntity.status(HttpStatus.FAILED_DEPENDENCY).body((JSONObject)parser.parse(updated));
+			
+		}
+		}
+		catch(ParseException pe) {
+			System.out.println("Something happened while converting to JSON");
+		}
+		return null;
+		}
 
-
+	
 	@DeleteMapping("/deleteBuyer/{buyer_id}")
-	public ResponseEntity<String> deleteProduct(@PathVariable("buyer_id") Long buyer_id) {
+	public ResponseEntity<JSONObject> deleteProduct(@PathVariable("buyer_id") Long buyer_id) {
 
 		System.out.println("Trying to delete re..." + buyer_id);
 		String response = this.buyerService.deleteBuyer(buyer_id);
+		try {
+			if (response.equalsIgnoreCase("deleted")) {
+				response="{'response':"+response+"}";
+				return ResponseEntity.ok((JSONObject)parser.parse(response));
+				
+			} else {
+				response="{'response':"+response+"}";
+				return ResponseEntity.status(HttpStatus.FAILED_DEPENDENCY).body((JSONObject)parser.parse(response));			
+			}
+			}
+			catch(ParseException pe) {
+				System.out.println("Something happened while converting to JSON");
+			}
+			return null;
+			}
 
-		if (response.equalsIgnoreCase("deleted")) {
-			return new ResponseEntity<String>(response,HttpStatus.OK);
-		} else
-			return new ResponseEntity<String>(response,HttpStatus.NOT_FOUND);
-	}
 	
 	@GetMapping("/getBuyerName/{buyer_id}")
 	public ResponseEntity<Buyer> getBuyerName(@PathVariable("buyer_id") Long buyer_id){

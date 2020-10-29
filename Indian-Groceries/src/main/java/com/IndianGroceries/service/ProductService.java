@@ -29,7 +29,7 @@ public class ProductService {
         return this.productDao.save(product);
     }
     
-   private Product getProductById(String product_id) {
+   public Product getProductById(String product_id) {
     	Product productById=null;
     	for(Product p : productDao.findAll()) {
     		if(p.getProduct_id().equals(product_id)) {

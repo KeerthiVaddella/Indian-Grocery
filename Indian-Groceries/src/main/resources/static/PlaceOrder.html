@@ -18,9 +18,9 @@
 		<div id="order-container" ng-app="IGApp" ng-controller="placeOrders">
 			<h1>Place Orders</h1>
 			<form id="form-id" ng-submit="placeOrder()">
-				<select ng-model="buyer.selectedBuyer">
+				<select ng-model="selectedBuyer">
 					<option value="">Select Buyer</option>
-					<option ng-repeat="buyer in Buyers" value="{{ buyer.buyer_id }}">{{ buyer.buyer_name }}</option>
+				    <option ng-repeat="buyer in buyers" value="{{ buyer.buyer_id }}">{{ buyer.buyer_name }}</option>
 				</select>
 				
 			

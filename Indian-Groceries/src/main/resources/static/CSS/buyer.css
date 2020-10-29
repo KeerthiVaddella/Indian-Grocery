@@ -40,5 +40,8 @@ h2{
 }
 
 #address{
-	word-break: keep-all;
+	word-break: break-word;
+    max-width: 120px;
+    padding: 4px;
 }
+

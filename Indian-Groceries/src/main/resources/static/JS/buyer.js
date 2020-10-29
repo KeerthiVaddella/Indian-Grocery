@@ -1,13 +1,10 @@
 /**
  Buyer page controlling using angular
  */
- let app =angular.module("buyerOps",[]);
- 
- 		//OnClick buttons
- 		app.service('getBuyers',function($scope){
- 	return $scope.buyers;
-}).controller("displayControl",['getBuyers',
- 		function($scope,$http,getBuyers){
+
+ //OnClick buttons
+ 		app.controller("displayControl",['$scope','buyerService',
+ 		function($scope,buyerService){
  			$scope.newBuyer=true;
  			$scope.allBuyers=false;
  			$scope.allOrders=false;
@@ -17,13 +14,30 @@
  				buyer_id:-1,
  				buyer_name:"",
  				address:"",
+ 				country:"",
+ 				state:"",
+ 				city:"",
  				gstin:""				
  			};
 			$scope.message="";
  			$scope.showMessage=false;
  			$scope.buyer_name="";
+ 			$scope.buyer={
+ 			buyer_id:0,
+ 			buyer_name:"",
+ 			address:"",
+ 			gstin:""
+ 			};
  			
- 			
+ 		$scope.locations={
+ 			'Andhra Pradesh' : ['Adoni','Amaravati','Anantapur','Bapatla','Bhimavaram','Chilakaluripet',
+ 								'Chirala','Chittoor','Dharmavaram','Eluru','Gudivada','Guntur','Hindupur',
+ 								'Kadapa','Kakinada','Kurnool','Machilipatnam','Madanapalle','Mangalagiri',
+ 								'Nandyal','Narasaraopet','Ongole','Proddatur','Rajamahendravaram'],
+				
+			'Tamil Nadu':['Chennai','Kanyakumari','Coimbatore','Madurai','Vellore','Ooty','Kanchipuram'],
+			'Kerala':['Kochi','Yernakulam','Thiruvananthapuram','Alappuzha','Kottayam','Munnar']
+				};
  			 			
  			//displays Buyer Form
  			$scope.addNewBuyer=function(){
@@ -53,62 +67,60 @@
  			
  			//adds or update a buyer
  			$scope.addBuyer=function(){
- 					var method = "";
-                    var url = "";
-                    if ($scope.form.buyer_id == -1) {
+ 					console.log($scope.form.city.value);
+ 					$scope.buyer.buyer_id=$scope.form.buyer_id;
+ 					$scope.buyer.buyer_name=$scope.form.buyer_name;
+ 					$scope.buyer.address=$scope.form.address+", "+$scope.form.city+", "+$scope.form.state;
+ 					$scope.buyer.gstin=$scope.form.gstin;
+ 			           if ($scope.form.buyer_id == -1) {
                         //Id is absent so add Product - POST operation
-                        console.log($scope.form.buyer_name);
-                        method = "POST";
-                        url = 'buyer/addBuyer';
-                        
+                        buyerService.addNewBuyer($scope.buyer).then(_success(response),_error(response));
                     } else {
                         //If Id is present, it's edit operation - PUT operation
-                        method = "PUT";
-                        url = 'buyer/updateBuyer';
-                        console.log("Put method"+ url);
+                       buyerService.updateBuyer($scope.buyer)
+                       .then(function(res){
+                        	_success(res);
+                       },
+                       function(errRes){
+                       		_error(errRes);
+                       });
                     }
-         
-                    $http({
-                        method : method,
-                        url : url,
-                        data : angular.toJson($scope.form),
-                        headers : {
-                            'Content-Type' : 'application/json'
-                        }
-                    }).then( _success, _error );
-                };
+         		};
+                   
                 
                 //HTTP DELETE- delete buyer by Id
                 $scope.removeBuyer = function(buyer_id) {
                 	
-                	let method='DELETE';
-                	let url= 'buyer/deleteBuyer/' + buyer_id
-                    $http({
-                        method : method,
-                        url : url
-                    }).then(_success, _error);
+                	buyerService.deleteBuyer(buyer_id).then(function(res){
+                        	_success(res);
+                        	$scope.showBuyers();
+                       },
+                       function(errRes){
+                       		_error(errRes);
+                       });
                 };
  
                 //In case of edit product, populate form with product data
                 $scope.editBuyer = function(buyer) {
-                	console.log("In Edit Buyer");
+                	let address=buyer.address.split(', ');
+                	
+                	console.log("In Edit Buyer"+ address);
                 	$scope.addNewBuyer();
                 	$scope.form.buyer_id = buyer.buyer_id;
                     $scope.form.buyer_name = buyer.buyer_name;
-                    $scope.form.address = buyer.address;
+                    $scope.form.address = address[0];
                     $scope.form.gstin = buyer.gstin;         
                 };
                 
                function getAllBuyers(){
-                	$http({ 
-                		method:'GET',
-                		url:'buyer/allBuyers'
-                		}).then(function successCallback(response) {
-                        $scope.buyers = response.data;
-                        console.log(response.data);
-                    }, function errorCallback(response) {
-                        console.log(response.statusText);
-                    });
+                	buyerService.getAllBuyers()
+			.then(function(data){
+				$scope.buyers=data;
+				console.log($scope.buyers);
+				},function(errRes){
+				 console.log("Error while fetching buyers "+errRes);
+				}
+			);
                		}
                		
                	$scope.getOrders=function(buyer_id){
@@ -119,20 +131,13 @@
                	$scope.getAllOrders=function(){
                		console.log($scope.form.buyer_id);
                		$scope.getPrevOrders();
-               		$http({
-               			method:'GET',
-               			url:'buyer/getBuyerName/' + $scope.form.buyer_id
-               			}).then(function successCallback(response) {
-               				$scope.buyer =response.data;
+               		buyerService.getBuyerById($scope.form.buyer_id)
+               			.then(function successCallback(response) {
+               				console.log(response +" in buyer.js");
+               				$scope.buyer =response;
+               				console.log($scope.buyer);
                				console.log('name is ' + $scope.buyer.buyer_name);
-               				/*$http({
-               					method:'GET',
-               					url:'invoice/getInvoiceByBuyer/'+$scope.form.buyer_id
-               				}).then(function successCallback(response){
-               				$scope.invoice=response.data;
-               				},function errorCallback(response){
-               					console.log(response.statusText);
-               				});*/
+               				
                			},function errorCallback(response){
                			console.log(response.statusText);
                			});
@@ -140,17 +145,20 @@
                	}           		
                		            		
                 
-                function _success() {
+                function _success(response) {
                 	$scope.showMessage=true;
-                	let params=response.message.split('?')[1].split('&');
-                	$scope.message = decodeURIComponent(params[0].split('=')[1]);
-                    _clearForm()
+                	
+                	$scope.message = response;
+                	$scope.message= $scope.message.charAt(0).toUpperCase()+$scope.message.slice(1);
+                	console.log($scope.message);
+                    _clearForm();
+                    
                 }
          
                 function _error(response) {
                 	$scope.showMessage=true;
-                	let params=response.message.split('?')[1].split('&');
-                	$scope.message = decodeURIComponent(params[0].split('=')[1]);
+                	$scope.message = response;
+                	$scope.message= $scope.message.charAt(0).toUpperCase()+$scope.message.slice(1)
                     _clearForm();
                 }
                 
@@ -160,6 +168,8 @@
                     $scope.form.buyer_name = "";
                     $scope.form.address = "";
                     $scope.form.gstin="";
+                    $scope.form.state="";
+                    $scope.form.city="";
                 };
  		}]);
  		

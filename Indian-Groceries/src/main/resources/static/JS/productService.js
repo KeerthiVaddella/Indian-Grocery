@@ -1,27 +1,23 @@
-/**
- * 
- */
+'use strict';
  
- 'use strict';
- 
-angular.module('IGApp').factory('buyerService', ['$http', '$q', function($http, $q){
+angular.module('IGApp').factory('productService', ['$http', '$q', function($http, $q){
  
     
     var factory = {
-        getAllBuyers: getAllBuyers,
-        addNewBuyer: addNewBuyer,
-        updateBuyer: updateBuyer,
-        deleteBuyer: deleteBuyer,
-        getBuyerById:getBuyerById
+        getAllProducts: getAllProducts,
+        addNewProduct: addNewProduct,
+        updateProduct: updateProduct,
+        deleteProduct: deleteProduct,
+        getProductById:getProductById
     };
  
     return factory;
- 
-    function getAllBuyers() {
+    
+     function getAllProducts() {
         var deferred = $q.defer();
         $http({ 
                 method:'GET',
-                url:'buyer/allBuyers'
+                url:'product/allProducts'
             }).then(function (response) {
                 deferred.resolve(response.data);
             },
@@ -33,13 +29,13 @@ angular.module('IGApp').factory('buyerService', ['$http', '$q', function($http, 
         console.log(deferred.promise);
         return deferred.promise;
     }
- 
-    function addNewBuyer(buyer) {
+    
+  function addNewProduct(product) {
         var deferred = $q.defer();
         $http({
                   method : 'POST',
-                  url : 'buyer/addBuyer',
-                  data : angular.toJson(buyer),
+                  url : 'product/addProduct',
+                  data : angular.toJson(product),
                   headers : {
                      'Content-Type' : 'application/json'
                       }
@@ -49,7 +45,7 @@ angular.module('IGApp').factory('buyerService', ['$http', '$q', function($http, 
                 deferred.resolve(response.data.response);
             	},function(errResponse) {
                 deferred.reject(errResponse.data.response);
-                console.log("Problem while adding buyer " +errResponse.data.response);
+                console.log("Problem while adding Product " +errResponse.data.response);
             
            } 
         );
@@ -57,12 +53,12 @@ angular.module('IGApp').factory('buyerService', ['$http', '$q', function($http, 
     }
  
  
-    function updateBuyer(buyer) {
+    function updateProduct(product) {
         var deferred = $q.defer();
         $http({
                         method : 'PUT',
-                        url : 'buyer/updateBuyer',
-                        data : angular.toJson(buyer),
+                        url : 'product/updateProduct/'+product.product_id,
+                        data : angular.toJson(product),
                         headers : {
                             'Content-Type' : 'application/json',                           
                         },
@@ -74,17 +70,17 @@ angular.module('IGApp').factory('buyerService', ['$http', '$q', function($http, 
                 deferred.resolve(response.data.response);
             	},function(errResponse) {
                 deferred.reject(errResponse.data.response);
-                console.log("Problem while Updating buyer " +errResponse.data.response);
+                console.log("Problem while Updating Product " +errResponse.data.response);
             
            } 
         );
         return deferred.promise;
     }
  
-    function deleteBuyer(buyer_id) {
+    function deleteProduct(product_id) {
         var deferred = $q.defer();
         let method='DELETE';
-        let url= 'buyer/deleteBuyer/' + buyer_id;
+        let url= 'product/deleteProduct/' + product_id;
                     $http({
                         method : method,
                         url : url
@@ -95,18 +91,18 @@ angular.module('IGApp').factory('buyerService', ['$http', '$q', function($http, 
                 deferred.resolve(response.data.response);
             	},function(errResponse) {
                 deferred.reject(errResponse.data.response);
-                console.log("Problem while deleting buyer " +errResponse.data.response);
+                console.log("Problem while deleting Product " +errResponse.data.response);
             
            } 
         );
         return deferred.promise;
     }
 	
-	function getBuyerById(buyer_id){
+	function getProductById(product_id){
 	 var deferred = $q.defer();
         $http({ 
                 method:'GET',
-                url:'buyer/getBuyerName/'+buyer_id
+                url:'product/getProductName/'+product_id
             }).then(function (response) {
             	console.log(response.data);
                 deferred.resolve(response.data);
@@ -120,5 +116,5 @@ angular.module('IGApp').factory('buyerService', ['$http', '$q', function($http, 
         console.log(deferred.promise);
         return deferred.promise;
     }
-}
-]);
+ 
+ }]);

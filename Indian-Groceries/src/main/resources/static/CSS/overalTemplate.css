@@ -42,6 +42,7 @@ h1 {
 
 #form-id{
   padding: 0.25rem 0;
+  display: inline-grid;
  }
  
  input{
@@ -53,7 +54,7 @@ h1 {
 	border-collapse: collapse;
 	width:80%;
 	border-color:#F6F6F6;
-	
+	color: antiquewhite;
 }
 
 th {
@@ -62,4 +63,7 @@ th {
 	padding: 0 30px;
 }
 
+select{
+	display:block;
+}
 
