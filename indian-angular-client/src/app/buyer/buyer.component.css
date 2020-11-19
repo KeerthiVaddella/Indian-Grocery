@@ -1,0 +1,23 @@
+@charset "ISO-8859-1";
+
+
+
+
+
+h2{
+	font-family: 'Aldrich';
+	font-size: 22px;
+	color:#D2F6FC;
+}
+
+#buyer-table{
+	    width: 95%;
+	    margin: 20px;
+}
+
+#address{
+	word-break: break-word;
+    max-width: 120px;
+    padding: 4px;
+}
+

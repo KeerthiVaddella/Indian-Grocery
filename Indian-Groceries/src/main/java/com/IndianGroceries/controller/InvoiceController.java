@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -34,7 +35,7 @@ public class InvoiceController {
 	 }
 	 
 	 @PostMapping("/addInvoiceEntry")
-	 public ResponseEntity<String> addInvoiceEntry(List<Invoice> invoice){
+	 public ResponseEntity<String> addInvoiceEntry(@RequestBody List<Invoice> invoice){
 		 String added=this.invoiceService.addInvoiceRecord(invoice);
 		 if(added.equalsIgnoreCase("added")) {
 			 return new ResponseEntity<String>(HttpStatus.OK);

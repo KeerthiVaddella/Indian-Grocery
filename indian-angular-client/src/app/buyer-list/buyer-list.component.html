@@ -1,0 +1,36 @@
+<div id="nav-div">
+    <app-buyer></app-buyer>
+    <div id="main-container">
+        <div id="buyer-container" class="panel panel-primary">
+            <div class="panel-heading">
+                <h1>List of Buyers</h1>
+            </div>
+            <div class="panel-body">
+                <table id="buyer-table" class="table-striped">
+                    <thead>
+                        <tr>
+                            <th>Buyer ID</th>
+                            <th>Buyer Name</th>
+                            <th>Address</th>
+                            <th>GSTIN</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let buyer of buyers | async">
+                            <td>{{buyer.buyer_id}}</td>
+                            <td>{{buyer.buyer_name}}</td>
+                            <td>{{buyer.address}}</td>
+                            <td>{{buyer.gstin}}</td>
+                            <td><button (click)="deleteBUyer(buyer.buyer_id)" class="btn btn-danger">Delete</button>
+                                <button (click)="updateBuyer(buyer.buyer_id)" class="btn btn-info"
+                                    style="margin-left: 10px;margin-right: 10px;">Update</button>
+                                <button (click)="getPrevOrders(buyer.buyer_id)" class="btn btn-info">Previuos Orders</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>   

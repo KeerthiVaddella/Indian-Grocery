@@ -29,7 +29,7 @@ public class ProductService {
         return this.productDao.save(product);
     }
     
-   private Product getProductById(String product_id) {
+   public Product getProductById(String product_id) {
     	Product productById=null;
     	for(Product p : productDao.findAll()) {
     		if(p.getProduct_id().equals(product_id)) {
@@ -41,11 +41,12 @@ public class ProductService {
     
     
     //Update Price of the product
-    public Product updatePrice(String product_id,float new_price) {
+    public Product updateProduct(String product_id,Product product) {
     		Product p=getProductById(product_id);
     		System.out.println("Found product");
      		if(p!=null) {
-    			p.setPrice(new_price);
+    			p.setPrice(product.getPrice());
+    			p.setDescription(product.getDescription());
     			this.productDao.save(p);
     			  			
     		}

@@ -1,0 +1,19 @@
+
+<div id="updateProduct">
+<h1>Update Product</h1>
+<div style="width: 400px;">
+    <form id="form-id" (ngSubmit)="onSubmit()">
+        <div class="form-div">
+        <label  for="description">Product Description</label>
+        <input type="text" id="description" required [(ngModel)]="product.description" size="60" name='description'/>
+        </div>
+        <div class="form-div">
+        <label  for="price">Price</label>
+        <input type="text" id="price" required [(ngModel)]="product.price" size="60" name='price' />
+        </div>
+        <div class="submit-div">
+            <button type="submit" class="btn btn-success">Update Product</button>
+        </div>
+    </form>
+</div>
+</div>

@@ -1,0 +1,43 @@
+<div id="add-items">
+    <h1>Select the items</h1>
+    <div id="select-items">
+      <form id="form-id" (ngSubmit)="onSubmit()" validate> 
+        <label for="buyer">Buyer</label>
+        <select id="buyer" name="buyer" [(ngModel)]="buyer_id" required>
+          <option selected disabled>--Select Buyer--</option>
+          <option *ngFor="let buyer of buyers | async" [ngValue]="buyer.buyer_id">{{buyer.buyer_name}}</option>
+        </select>
+        <label for="order-date">Select Date</label>
+        <input type="date" id="order-date" name="order-date" [(ngModel)]="order_date" required>
+        <label for="tax">Tax</label>
+        <input type="number" id="tax" name="tax" [(ngModel)]="tax" required>
+        <table class="table-striped">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Free Items</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let product of products | async; let i=index">
+                <td style="text-align: left;">{{product.description}}</td>
+                <td>{{product.price}}</td>
+                <td><input type="text" placeholder="No. of items" min='0' #quantity ></td>
+                <td><input type="text" placeholder="No of Free items"  #free_items  min='0' (change)="errorCheck(free_items.value,quantity.value,i)"></td>
+                <td><button (click)="addItem(product.product_id,quantity.value,free_items.value,product.price)"
+                  class="btn btn-info">Add to Cart</button></td>
+                  <div *ngIf="divId===i && errors" style="background-color: darkred; font-size:xx-small;">Free Items should be less than Quantity</div>
+              </tr>
+              
+            </tbody>  
+        </table>
+        <button type="submit" class="btn btn-info">Finish and Review Cart</button>
+      </form>
+    </div>
+
+    <app-cart></app-cart>
+</div>
+

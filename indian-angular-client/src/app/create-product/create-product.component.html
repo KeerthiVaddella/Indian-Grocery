@@ -1,0 +1,22 @@
+<div id="newProduct">
+    <h1>Add New Product</h1>
+
+    <form id="form-id" (ngSubmit)="onSubmit()">
+        <div class="form-div">
+        <label  for="description">Product Description</label><br>
+        <input type="text" id="description" required [(ngModel)]="product.description" size="60" name="description"/>
+        </div>
+        <div class="form-div">
+        <label  for="price">Price</label><br>
+        <input type="text" id="price" required [(ngModel)]="product.price" size="60" name="price" />
+        </div>
+        <div class="submit-div">
+            <button type="submit" class="btn btn-success">Add Product</button>
+        </div>
+    </form>
+</div>	
+
+<div [hidden]="!submited">
+    <h4>You submitted successfully!</h4>
+    <!-- <button class="btn btn-success" (click)="newProduct()">Add</button> -->
+  </div>

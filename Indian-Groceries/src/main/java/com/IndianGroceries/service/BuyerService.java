@@ -61,7 +61,7 @@ public class BuyerService {
     		b1.updateBuyer(buyer.getBuyer_name(),buyer.getAddress(),buyer.getGstin());
     		this.buyerDao.save(b1);
     	}
-    	return "updated";
+    	return "Updated";
     }
     
     //Delete Buyer

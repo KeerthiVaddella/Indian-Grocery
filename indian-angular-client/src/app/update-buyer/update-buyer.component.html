@@ -1,0 +1,23 @@
+
+<div id="updateBuyer">
+    <h1>Update Buyer</h1>
+    <div style="width: 400px;">
+        <form id="form-id" (ngSubmit)="onSubmit()">
+            <div class="form-div">
+            <label  for="name">Buyer Name</label>
+            <input type="text" id="name" required [(ngModel)]="buyer.buyer_name" size="60" name='name'/>
+            </div>
+            <div class="form-div">
+            <label  for="address">Address</label>
+            <input type="text" id="address" required [(ngModel)]="buyer.address" size="60" name='address' />
+            </div>
+            <div class="form-div">
+                <label  for="gstin">Gstin</label>
+                <input type="text" id="gstin" required [(ngModel)]="buyer.gstin" size="60" name='gstin' />
+                </div>
+            <div class="submit-div">
+                <button type="submit" class="btn btn-success">Update Product</button>
+            </div>
+        </form>
+    </div>
+    </div>
