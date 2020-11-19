@@ -1,0 +1,29 @@
+.slideshow-container {
+    display: block;
+    padding: 2em;
+    margin-left:12rem;
+    width: 62rem;
+    height: 36rem;
+  }
+  
+  
+  #about_us{
+      margin-top:1rem;
+      margin-left: 6.5rem;
+      width:90%;
+      height:450px;
+      background-color:#1E56A0;
+      max-width: 71rem;
+  }
+  
+  
+  #about_section{
+      font-family: 'Alice';
+      font-size: 18px;
+      padding:20px;
+      color:#F6F6F6;
+  }
+  
+  a:hover{
+      color: #fdc826 ;
+  }

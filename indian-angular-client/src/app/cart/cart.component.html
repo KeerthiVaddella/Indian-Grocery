@@ -1,0 +1,37 @@
+<div id="cartDiv" *ngIf="show">
+    <table class="table-striped">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Package Type</th>
+                <th>Quantity</th>
+                <th>Free Packs</th>
+                <th>Distributor Price</th>
+                <th>Selling Price</th>
+                <th>C.GSY</th>
+                <th>S.GST</th>
+                <th>Amount</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let invoice of invoices |async; let product of products ngIf product.product_id===invoice.product_id; ">
+            <td style="text-align: left;">{{product.description}}</td>
+            <td>{{invoice.package}}</td>
+            <td>{{invoice.quantity}}</td>
+            <td>{{invoice.freepacks}}</td>
+            <td>{{product.price}}</td>
+            <td>{{invoice.selling_price}}</td>
+            <td>{{invoice.tax/2}}</td>
+            <td>{{invoice.tax/2}}</td>
+            <td>{{invoice.amount</td>
+            <td><button (click)="removeItem(invoice.product_id)"
+              class="btn btn-danger">Remove Item</button></td>   
+          </tr>
+        </tbody>  
+    </table>
+    <div id="actions">
+     <button class="btn btn-info" (click)="placeOrder()">Place Order</button>
+     <button class="btn btn-danger" (click)="updateCart()">Update Cart</button>
+    </div>
+</div>

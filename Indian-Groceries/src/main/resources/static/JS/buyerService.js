@@ -4,7 +4,7 @@
  
  'use strict';
  
-angular.module('IGApp').factory('buyerService', ['$http', '$q', function($http, $q){
+app.factory('buyerService', ['$http', '$q', function($http, $q){
  
     
     var factory = {

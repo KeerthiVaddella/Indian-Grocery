@@ -1,0 +1,29 @@
+<div id="nav-div">
+<app-buyer></app-buyer>
+<div id="main-container">
+    <h1>Add New Buyer</h1>
+
+    <form id="form-id" (ngSubmit)="onSubmit()">
+        <div class="form-div">
+        <label  for="name">Buyer Name</label><br>
+        <input type="text" id="name" required [(ngModel)]="buyer.buyer_name" size="60" name="name"/>
+        </div>
+        <div class="form-div">
+        <label  for="address">Address</label><br>
+        <input type="text" id="address" required [(ngModel)]="buyer.address" size="60" name="address" />
+        </div>
+        <div class="form-div">
+            <label  for="gstin">Gstin</label><br>
+            <input type="text" id="gstin" required [(ngModel)]="buyer.gstin" size="60" name="gstin" />
+            </div>
+        <div class="submit-div">
+            <button type="submit" class="btn btn-success">Add Buyer</button>
+        </div>
+    </form>
+</div>	
+
+<div [hidden]="!submited">
+    <h4>You submitted successfully!</h4>
+    <!-- <button class="btn btn-success" (click)="newBuyer()">Add</button> -->
+  </div>
+</div>

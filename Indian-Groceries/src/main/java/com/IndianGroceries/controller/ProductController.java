@@ -2,9 +2,11 @@ package com.IndianGroceries.controller;
 
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,6 +24,7 @@ import net.minidev.json.parser.ParseException;
 
 import com.IndianGroceries.entity.Product;
 
+@CrossOrigin(origins="*",allowedHeaders="*",allowCredentials="true")
 @RestController
 @RequestMapping("/product")
 public class ProductController {
@@ -50,10 +53,10 @@ public class ProductController {
 	         return new ResponseEntity<Product>(this.productService.addProduct(product),HttpStatus.CREATED);
 	     }
 	     
-	     @PutMapping("/updatePrice/{product_id}")
+	     @PutMapping("/updateProduct/{product_id}")
 	     public ResponseEntity<Product> updatePrice(@PathVariable("product_id") String product_id,@RequestBody Product product) {
-	    	System.out.println(product_id+" & "+product.getPrice());
-	    	 Product product1=this.productService.updatePrice(product_id,product.getPrice());
+	    	System.out.println(product_id+" & "+product);
+	    	 Product product1=this.productService.updateProduct(product_id,product);
 	    	 if(product1!=null) {
 	    		return new ResponseEntity<Product>(product1,HttpStatus.OK);
 	    	}
@@ -85,7 +88,7 @@ public class ProductController {
 	     public ResponseEntity<Product> getProductById(@PathVariable("product_id") String product_id){
 	    	 Product product=this.productService.getProductById(product_id);
 	    	 if(product!=null)
-	    		 return new ResponseEntity<Product>(product,HttpStatus.FOUND);
+	    		 return new ResponseEntity<Product>(product,HttpStatus.OK);
 	    	 else
 	    		 return new ResponseEntity<Product>(HttpStatus.NOT_FOUND);
 	     }

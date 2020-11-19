@@ -41,11 +41,12 @@ public class ProductService {
     
     
     //Update Price of the product
-    public Product updatePrice(String product_id,float new_price) {
+    public Product updateProduct(String product_id,Product product) {
     		Product p=getProductById(product_id);
     		System.out.println("Found product");
      		if(p!=null) {
-    			p.setPrice(new_price);
+    			p.setPrice(product.getPrice());
+    			p.setDescription(product.getDescription());
     			this.productDao.save(p);
     			  			
     		}

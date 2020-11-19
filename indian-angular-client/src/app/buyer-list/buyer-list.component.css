@@ -1,0 +1,40 @@
+@charset "ISO-8859-1";
+
+#buyer-container {
+	margin:0px;
+	background-color: #1E56A0;;
+	padding: 1rem;
+	text-align: -webkit-center;
+}
+
+
+
+#buyer-table {
+	width: 95%;
+    margin: 15px;
+    white-space: nowrap;
+}
+
+th {
+	height: 20px;
+    border: 1px solid #FFFFFF;
+    padding: 0 25px;
+    text-align: center;
+    font-size: 20px;
+}
+
+td {
+	padding: 0 15px;
+}
+
+.actions-class{
+	text-align:center;
+}
+
+table{
+    margin: 1.25rem;
+    color: antiquewhite;
+}
+
+
+
