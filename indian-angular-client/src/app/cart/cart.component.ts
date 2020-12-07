@@ -33,4 +33,15 @@ export class CartComponent implements OnInit {
     this.show=false;
   }
 
+  removeItem(product_id:string){
+    let invoice;
+    for(let i in this.invoices){
+      if(this.invoices[i].product_id.localeCompare(product_id)){
+        invoice=this.invoices[i];
+      }
+    }
+    let index= this.invoices.findIndex(invoice);
+    this.invoices.splice(index,1);
+  }
+
 }

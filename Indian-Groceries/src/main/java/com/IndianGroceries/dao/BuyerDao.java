@@ -7,4 +7,5 @@ import com.IndianGroceries.entity.Buyer;
 
 @Repository
 public interface BuyerDao extends JpaRepository<Buyer, Integer> {
+	Buyer findByAddress(String address);
 }

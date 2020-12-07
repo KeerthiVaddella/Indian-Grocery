@@ -18,7 +18,7 @@ export class AppComponent{
   }
 
   ngOnInit(){
-    this.route.queryParams.subscribe();
+    this.route.queryParamMap.subscribe();
   }
 
 }

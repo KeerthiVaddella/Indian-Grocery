@@ -19,11 +19,10 @@ public class BuyerService {
 	
 	//Add a new buyer
     public String addBuyer(Buyer buyer) {
-    	for(Buyer b : getAllBuyers()) {
-    		if(b.getAddress().equalsIgnoreCase(buyer.getAddress())) {
-    			return "Address Already Exists";
-    		}
-    	}
+    	Buyer buyer2=this.buyerDao.findByAddress(buyer.getAddress());
+    	if(buyer2!=null)
+    		return "Address Already Exists";
+	
     	this.buyerDao.save(buyer);
         return "Added";
     }
